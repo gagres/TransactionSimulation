@@ -1,0 +1,1 @@
+- Uma aplicação simples (com a tecnologia que achar melhor) que, utilizando a API do Pagar.me, crie uma transação com uma regra de split (split_rule) para dois recebedores (recipients) e liste o resultado final da transação e os dois valores a se receber (payables).

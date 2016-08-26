@@ -1,0 +1,27 @@
+{
+  "name": "Transaction_Simulation",
+  "authors": [
+    "gagres <gabriel.giro.resende@outlook.com>"
+  ],
+  "description": "Simulacao de uma transacao com dois recebedores",
+  "main": "index.html",
+  "keywords": [
+    "Transaction",
+    "Web",
+    "Test"
+  ],
+  "license": "MIT",
+  "homepage": "",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "^3.3.7",
+    "angular": "^1.5.8"
+  }
+}
