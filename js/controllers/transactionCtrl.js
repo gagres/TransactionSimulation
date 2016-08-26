@@ -8,7 +8,7 @@
 
     function transactionCtrl(){
       var vm = this;
-      vm.field_errors = "Não foi possível fazer isso";
+      vm.field_errors = null;
       vm.amount = 0;
       vm.card = {
         "number": null,

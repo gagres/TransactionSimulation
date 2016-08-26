@@ -6,30 +6,33 @@
 .products{
   width:90%;
   margin-left:5%;
-}
-.products .products-title{
-  margin-bottom:5px;
+  margin-bottom:20%;
 }
 .products .product{
+  margin-bottom:10px;
+}
+.product .product-image{
   width:100%;
   height:200px;
-  text-align:center;
 }
-.product-name{
-  text-align:center;
-  margin-top:10px;
-}
-.product-price{
+.product .product-name{
   text-align:center;
   margin-top:10px;
 }
-.options{
+.product .product-price{
+  text-align:center;
+  margin-top:10px;
+}
+.product .options{
   text-align:center;
 }
-.options b{
+.product .options b{
   font-size:20px;
   margin-left:5px;
   margin-right:5px;
+}
+.products-amount{
+  font-size:15px;
 }
 .form-card{
   margin-top:5%;
