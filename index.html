@@ -32,10 +32,18 @@
         <div class="panel-body">
           <div class="row">
             <div class="products">
+                <div class="products-title">
+                  Quantidade a pagar: {{ vm.amount }}
+                </div>
                 <div class="col-md-3" ng-repeat="product in vm.products track by $index">
                   <img class="product" src="{{ product.url }}">
                   <p class="product-name col-md-12">{{ product.name }}</p>
                   <p class="product-price">R$ {{ product.price }}</p>
+                  <p class="options">
+                    <button class="btn btn-danger" ng-click="vm.increaseAmount(product, -1)">-</button>
+                    <b>{{ product.qte }}</b>
+                    <button class="btn btn-primary" ng-click="vm.increaseAmount(product, 1)">+</button>
+                  </p>
                 </div>
             </div>
           </div>

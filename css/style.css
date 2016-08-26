@@ -1,6 +1,14 @@
+/*Panel Config*/
+.panel .panel-heading{
+  text-align:center;
+}
+
 .products{
   width:90%;
   margin-left:5%;
+}
+.products .products-title{
+  margin-bottom:5px;
 }
 .products .product{
   width:100%;
@@ -14,6 +22,14 @@
 .product-price{
   text-align:center;
   margin-top:10px;
+}
+.options{
+  text-align:center;
+}
+.options b{
+  font-size:20px;
+  margin-left:5px;
+  margin-right:5px;
 }
 .form-card{
   margin-top:5%;
