@@ -24,11 +24,33 @@
   <script src="js/app.js"></script>
   <script src="js/configs/routeConfig.js"></script>
   <script src="js/constants/products.js"></script>
+  <script src="js/controllers/homeCtrl.js"></script>
   <script src="js/controllers/transactionCtrl.js"></script>
+  <script src="js/services/productService.js"></script>
 </head>
 <body ng-app="testApp">
   <div class="container">
-      <div ui-view></div>
+    <nav class="navbar navbar-default">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="#">Simulação de transação</a>
+        </div>
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav">
+            <li><a href="#/">Comprar</a></li>
+            <li><a href="#">Ver compras</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <div class="panel panel-default" ng-controller="homeCtrl as vm">
+      <div class="panel-body">
+        <div ui-view></div>
+      </div>
+    </div>
+    <div class="footer">
+      <label>Developed by: Gabriel Giro Resende</label>
+    </div>
   </div>
 </body>
 </html>

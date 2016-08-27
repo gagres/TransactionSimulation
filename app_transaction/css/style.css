@@ -1,12 +1,9 @@
-/*Panel Config*/
-.panel .panel-heading{
-  text-align:center;
-}
-
+/*HOME config*/
 .products{
   width:90%;
   margin-left:5%;
   margin-bottom:20%;
+  margin-top:6%;
 }
 .products .product{
   margin-bottom:10px;
@@ -34,10 +31,44 @@
 .products-amount{
   font-size:15px;
 }
+.btn-confirm{
+  position:relative;
+  right:10px;
+  margin-top:10px;
+}
+
+/*Transaction Config*/
+.table tbody td img{
+  width:100px;
+}
+.table tbody tr td b{
+  font-size: 20px;
+  margin-left: 5px;
+  margin-right: 5px;
+}
+.options{
+  margin-top:5%;
+}
+.options h3{
+  margin-bottom: 20px;
+}
 .form-card{
   margin-top:5%;
 }
 .error{
   text-align:center;
   margin-bottom:10px;
+}
+.billet-form{
+  margin-top:20px;
+}
+
+/*Footer config*/
+.footer{
+  width:100%;
+  text-align:center
+}
+.footer label, .footer p{
+  font-size: 10px;
+  margin:10px;
 }

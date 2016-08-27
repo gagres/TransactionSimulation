@@ -7,11 +7,19 @@
 
     function routeConfig($stateProvider, $urlRouterProvider){
       $stateProvider
-        .state('home', {
+        .state("home", {
           "url": "/",
           "templateUrl": "views/home.html",
+          "controller": "homeCtrl",
+          "controllerAs": "vm",
+          "cache": false
+        })
+        .state("transaction", {
+          "url": "/transaction",
+          "templateUrl": "views/transaction.html",
           "controller": "transactionCtrl",
-          "controllerAs": "vm"
+          "controllerAs": "vm",
+          "cache": false
         })
 
       $urlRouterProvider.otherwise('/');
