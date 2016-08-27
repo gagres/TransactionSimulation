@@ -2,7 +2,7 @@
   'use strict';
 
   angular
-    .module('testApp', [])
+    .module('testApp', ['ui.router'])
     .config(setPagarmeKey)
 
     function setPagarmeKey(){

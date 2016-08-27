@@ -4,9 +4,9 @@
   angular
     .module('testApp')
     .controller('transactionCtrl', transactionCtrl)
-    transactionCtrl.$inject = [];
+    transactionCtrl.$inject = ['Products', '$http'];
 
-    function transactionCtrl(){
+    function transactionCtrl(Products, $http){
       var vm = this;
       vm.field_errors = null;
       vm.amount = 0;
@@ -16,12 +16,7 @@
         "expiration_date": null,
         "cvv": null
       };
-      vm.products = [
-        {'url':'img/feijao.jpg', 'name': 'Feijao', 'price': 14, 'qte': 0},
-        {'url':'img/arroz.jpg', 'name': 'Arroz', 'price': 6, 'qte': 0},
-        {'url':'img/cheetos.jpg', 'name': 'Salgadinho Cheetos', 'price': 3, 'qte': 0},
-        {'url':'img/friboi.jpg', 'name': 'Carne Friboi', 'price': 8.75, 'qte': 0}
-      ]
+      vm.products = Products;
 
       vm.confirmTransaction = confirmTransaction;
       vm.increaseAmount = increaseAmount;
@@ -31,6 +26,16 @@
           console.log(new Date(card.expiration_month).getMonth(), new Date(card.expiration_month).getFullYear());
 
         console.log(card);
+        var request = $http({
+          "url": 'http://localhost/Pagar.me/php/index.php',
+          "method": "GET"
+        })
+        request
+          .then(function (data) {
+            console.log(data);
+          }, function (err) {
+            console.log(err);
+          })
       }
 
       function increaseAmount(product, qte){
@@ -38,7 +43,8 @@
           //Do nothing
         }else{
           if(product.qte >= 0){
-            vm.amount += product.price * parseInt(qte);
+            vm.amount += product.price * parseFloat(qte);
+            vm.amount = parseFloat(vm.amount.toFixed(2));
             product.qte += parseInt(qte);
           }
         }
