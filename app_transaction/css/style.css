@@ -1,4 +1,21 @@
-/*HOME config*/
+/*NAVBAR Config*/
+.navbar{
+  background-color:#E7B13A;
+}
+.navbar .navbar-brand{
+  color:black;
+}
+.navbar ul li a{
+  color:black;
+  font-family: arial;
+}
+
+/*Panel Config*/
+.container .panel{
+  border:1px solid #E7B13A;
+}
+
+/*HOME.html config*/
 .products{
   width:90%;
   margin-left:5%;
@@ -37,29 +54,37 @@
   margin-top:10px;
 }
 
-/*Transaction Config*/
-.table tbody td img{
+/*Transaction.html Config*/
+.empty{
+  margin:5%;
+  text-align:center;
+}
+.empty .message{
+  color:black;
+  font-size:18px;
+}
+.cart .table tbody td img{
   width:100px;
 }
-.table tbody tr td b{
+.cart .table tbody tr td b{
   font-size: 20px;
   margin-left: 5px;
   margin-right: 5px;
 }
-.options{
+.cart .options{
   margin-top:5%;
 }
-.options h3{
+.cart .options h3{
   margin-bottom: 20px;
 }
-.form-card{
+.cart .form-card{
   margin-top:5%;
 }
-.error{
+.cart .error{
   text-align:center;
   margin-bottom:10px;
 }
-.billet-form{
+.cart .billet-form{
   margin-top:20px;
 }
 

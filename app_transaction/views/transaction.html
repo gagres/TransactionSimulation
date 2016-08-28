@@ -1,71 +1,77 @@
 <div class="transaction" ng-controller="transactionCtrl as vm">
-  <h3>Meu carrinho</h3>
-  <table class="table">
-    <thead>
-      <th></th>
-      <th>Nome produto: </th>
-      <th>Quantidade: </th>
-      <th>Preço</th>
-      <th>Total: </th>
-    </thead>
-    <tbody>
-      <tr ng-repeat="product in vm.listProducts track by $index">
-        <td><img src="{{ product.url }}"></td>
-        <td>{{ product.name }}</td>
-        <td>
-          <button class="btn btn-danger btn-xs" ng-click="vm.increaseAmount(product, -1)">-</button>
-          <b>{{ product.qte }}</b>
-          <button class="btn btn-primary btn-xs" ng-click="vm.increaseAmount(product, 1)">+</button>
-        </td>
-        <td>{{ product.price }}</td>
-        <td>{{ product.total }}</td>
-      </tr>
-    </tbody>
-  </table>
-  <div class="options" ng-if="vm.amount">
-    <h3>Formas de pagamento</h3>
-    <button class="btn btn-primary" ng-click="vm.changePayForm('card')">Cartão</button>
-    <button class="btn btn-danger" ng-click="vm.changePayForm('billet')">Boleto</button>
-    <button type="submit" class="btn btn-success" ng-click="vm.confirmTransaction(vm.card)" ng-disabled="!vm.payForm">
-      Confirmar transação
-    </button>
+  <div class="empty" ng-if="!vm.listProducts.length">
+    <h2 class="title"> Você ainda não tem nada cadastrado :( </h2>
+    <a href="#/" class="message">Vamos fazer umas compras?</a>
   </div>
-  <form id="payment_form" class="form-card"  method="POST">
-    <div ng-if="vm.payForm === 'card'">
-      <div class="row">
-        <div class="form-group col-md-5">
-          <label> Número do cartão: </label>
-          <input type="text" ng-model="vm.card.number" class="form-control"/>
-        </div>
-        <div class="form-group col-md-4
-        ">
-          <label> Mês de expiração: </label>
-          <input type="month" ng-model="vm.card.expiration_date" class="form-control"/>
-        </div>
-        <div class="form-group col-md-3">
-          <label> Código de segurança: </label>
-          <input type="text" ng-model="vm.card.cvv" class="form-control"/>
-        </div>
-      </div>
-      <div class="row">
-        <div class="form-group col-md-8">
-          <label> Nome (como escrito no cartão): </label>
-          <input type="text" ng-model="vm.card.holder_name" class="form-control"/>
-        </div>
-        <div class="form-inline form-group col-md-4">
-          <label> Quantidade a pagar: </label>
-          <div class="input-group">
-            <div class="input-group-addon">R$</div>
-            <input type="text" ng-model="vm.amount" class="form-control" ng-placeholder="vm.amount" disabled/>
+  <div class="cart" ng-if="vm.listProducts.length">
+    <h3><i class="glyphicon glyphicon-shopping-cart"></i> Meu carrinho</h3>
+    <table class="table">
+      <thead>
+        <th></th>
+        <th>Nome produto: </th>
+        <th>Quantidade: </th>
+        <th>Preço</th>
+        <th>Total: </th>
+      </thead>
+      <tbody>
+        <tr ng-repeat="product in vm.listProducts track by $index">
+          <td><img src="{{ product.url }}"></td>
+          <td>{{ product.name }}</td>
+          <td>
+            <button class="btn btn-danger btn-xs" ng-click="vm.increaseAmount(product, -1)">-</button>
+            <b>{{ product.qte }}</b>
+            <button class="btn btn-primary btn-xs" ng-click="vm.increaseAmount(product, 1)">+</button>
+          </td>
+          <td>{{ product.price }}</td>
+          <td>{{ product.total }}</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="options" ng-if="vm.amount">
+      <h3>Formas de pagamento</h3>
+      <button class="btn btn-primary" ng-click="vm.changePayForm('card')">Cartão</button>
+      <button class="btn btn-danger" ng-click="vm.changePayForm('billet')">Boleto</button>
+      <button type="submit" class="btn btn-success" ng-click="vm.confirmTransaction(vm.card)" ng-disabled="!vm.payForm">
+        Confirmar transação
+      </button>
+    </div>
+    <form id="payment_form" class="form-card"  method="POST">
+      <div ng-if="vm.payForm === 'card'">
+        <div class="row">
+          <div class="form-group col-md-5">
+            <label> Número do cartão: </label>
+            <input type="text" ng-model="vm.card.number" class="form-control"/>
+          </div>
+          <div class="form-group col-md-4
+          ">
+            <label> Mês de expiração: </label>
+            <input type="month" ng-model="vm.card.expiration_date" class="form-control"/>
+          </div>
+          <div class="form-group col-md-3">
+            <label> Código de segurança: </label>
+            <input type="text" ng-model="vm.card.cvv" class="form-control"/>
           </div>
         </div>
+        <div class="row">
+          <div class="form-group col-md-8">
+            <label> Nome completo: </label>
+            <input type="text" ng-model="vm.card.holder_name" class="form-control"/>
+          </div>
+          <div class="form-inline form-group col-md-4">
+            <label> Preço a pagar: </label>
+            <div class="input-group">
+              <div class="input-group-addon">R$</div>
+              <input type="text" ng-model="vm.amount" class="form-control" ng-placeholder="vm.amount" disabled/>
+            </div>
+          </div>
+        </div>
+        <div class="row error col-md-12">
+          {{ vm.field_errors }}
+        </div>
       </div>
-      <div class="row error col-md-12">
-        {{ vm.field_errors }}
+      <div ng-if="vm.payForm === 'billet'" class="billet-form">
+        <p class="message-billet">Apenas clique em confirmar transação para finalizar a compra</p>
       </div>
-    </div>
-    <div ng-if="vm.payForm === 'billet'" class="billet-form">
-      <p class="message-billet">Apenas clique em confirmar transação para finalizar a compra</p>
-    </div>
-  </form>
+    </form>
+  </div>
 </div>
