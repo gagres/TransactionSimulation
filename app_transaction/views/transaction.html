@@ -1,17 +1,17 @@
 <div class="transaction" ng-controller="transactionCtrl as vm">
   <div class="empty" ng-if="!vm.listProducts.length">
-    <h2 class="title"> Você ainda não tem nada cadastrado :( </h2>
+    <h2 class="title"> Você ainda não tem nada no carrinho :( </h2>
     <a href="#/" class="message">Vamos fazer umas compras?</a>
   </div>
   <div class="cart" ng-if="vm.listProducts.length">
     <h3><i class="glyphicon glyphicon-shopping-cart"></i> Meu carrinho</h3>
     <table class="table">
       <thead>
-        <th></th>
-        <th>Nome produto: </th>
-        <th>Quantidade: </th>
-        <th>Preço</th>
-        <th>Total: </th>
+        <th class="col-md-2"></th>
+        <th class="col-md-3">Nome produto: </th>
+        <th class="col-md-1">Quantidade: </th>
+        <th class="col-md-2">Preço</th>
+        <th class="col-md-2">Total: </th>
       </thead>
       <tbody>
         <tr ng-repeat="product in vm.listProducts track by $index">
@@ -24,6 +24,18 @@
           </td>
           <td>{{ product.price }}</td>
           <td>{{ product.total }}</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td>
+            <div class="input-group">
+              <div class="input-group-addon">R$</div>
+              <input type="text" ng-model="vm.amount" class="form-control" ng-placeholder="vm.amount" disabled/>
+            </div>
+          </td>
         </tr>
       </tbody>
     </table>
@@ -38,31 +50,17 @@
     <form id="payment_form" class="form-card"  method="POST">
       <div ng-if="vm.payForm === 'card'">
         <div class="row">
-          <div class="form-group col-md-5">
-            <label> Número do cartão: </label>
-            <input type="text" ng-model="vm.card.number" class="form-control"/>
-          </div>
-          <div class="form-group col-md-4
-          ">
+          <ui-limit limit="12" value="vm.card.number" type="number" class="col-md-5">Número do cartão:</ui-limit>
+          <div class="form-group col-md-4">
             <label> Mês de expiração: </label>
             <input type="month" ng-model="vm.card.expiration_date" class="form-control"/>
           </div>
-          <div class="form-group col-md-3">
-            <label> Código de segurança: </label>
-            <input type="text" ng-model="vm.card.cvv" class="form-control"/>
-          </div>
+          <ui-limit limit="3" value="vm.card.cvv" type"text" class="col-md-3">Código de segurança:</ui-limit>
         </div>
         <div class="row">
           <div class="form-group col-md-8">
             <label> Nome completo: </label>
             <input type="text" ng-model="vm.card.holder_name" class="form-control"/>
-          </div>
-          <div class="form-inline form-group col-md-4">
-            <label> Preço a pagar: </label>
-            <div class="input-group">
-              <div class="input-group-addon">R$</div>
-              <input type="text" ng-model="vm.amount" class="form-control" ng-placeholder="vm.amount" disabled/>
-            </div>
           </div>
         </div>
         <div class="row error col-md-12">

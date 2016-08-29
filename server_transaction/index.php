@@ -1,4 +1,5 @@
 <?php
+  $request = json_decode(file_get_contents('php://input'), true);
   // require('../vendor/pagarme-php/Pagarme.php');
   //
   // Pagarme::setApiKey('ak_test_uq3iH2FtBlSokZuBqBp5C4E7LIajGg');
@@ -17,5 +18,4 @@
   //
   // echo $boleto_url + "<br/>";
   // echo $boleto_barcode + "<br/>";
-  echo "Esta aqui no servidor";
 ?>

@@ -53,7 +53,7 @@
 
         var request = $http({
           "url": 'http://localhost/Pagar.me/server_transaction/index.php',
-          "method": "GET"
+          "method": "POST"
         })
         request
           .then(function (data) {

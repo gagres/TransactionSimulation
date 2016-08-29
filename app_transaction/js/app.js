@@ -8,7 +8,7 @@
 
     function runApp(Product, $rootScope, $location) {
       $rootScope.$on('$stateChangeStart', function (event, toState, fromState){
-        if(!Product.getFinalAmount() && toState.url === '/transaction' || fromState.url == "/transaction"){
+        if((!Product.getFinalAmount() && toState.url === '/transaction') || fromState.url == "/transaction"){
           //$location.url('/');
         }
       })

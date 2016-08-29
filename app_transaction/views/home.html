@@ -3,7 +3,10 @@
     <div class="form-inline amount">
       <div class="form-group col-md-12">
         <label>Preço total: </label>
-        <input type="text" class="form-control" ng-value="vm.amount" disabled>
+        <div class="input-group">
+          <div class="input-group-addon">R$</div>
+          <input type="text" ng-model="vm.amount" class="form-control" ng-placeholder="vm.amount" disabled/>
+        </div>
       </div>
     </div>
     <div class="products">
