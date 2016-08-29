@@ -55,13 +55,11 @@
             <label> Mês de expiração: </label>
             <input type="month" ng-model="vm.card.expiration_date" class="form-control"/>
           </div>
-          <ui-limit limit="3" value="vm.card.cvv" type"text" class="col-md-3">Código de segurança:</ui-limit>
+          <ui-limit limit="3" value="vm.card.cvv" type"number" class="col-md-3">Código de segurança:</ui-limit>
         </div>
         <div class="row">
-          <div class="form-group col-md-8">
-            <label> Nome completo: </label>
-            <input type="text" ng-model="vm.card.holder_name" class="form-control"/>
-          </div>
+            <ui-limit limit="50" value="vm.card.holder_name" type="text" class="col-md-8">Nome completo (como no cartão)</ui-limit>
+        </div>
         </div>
         <div class="row error col-md-12">
           {{ vm.field_errors }}

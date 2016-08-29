@@ -18,7 +18,7 @@
         link: function (scope, elem, attr) {
           elem.bind('keypress', function (e) {
             if(scope.value){
-              if(scope.value.toString().length === scope.limit){
+              if(scope.value.toString().length === parseInt(scope.limit)){
                 e.preventDefault();
                 return false;
               }
