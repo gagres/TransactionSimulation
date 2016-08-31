@@ -43,31 +43,63 @@
       <h3>Formas de pagamento</h3>
       <button class="btn btn-primary" ng-click="vm.changePayForm('card')">Cartão</button>
       <button class="btn btn-danger" ng-click="vm.changePayForm('billet')">Boleto</button>
-      <button type="submit" class="btn btn-success" ng-click="vm.confirmTransaction(vm.card)" ng-disabled="!vm.payForm">
+      <button type="submit" class="btn btn-success" ng-click="vm.confirmTransaction(vm.card)" ng-disabled="!vm.payForm || formCard.$invalid">
         Confirmar transação
       </button>
     </div>
-    <form id="payment_form" class="form-card"  method="POST">
+    <form class="form-card" name="formCard">
       <div ng-if="vm.payForm === 'card'">
         <div class="row">
-          <ui-limit limit="12" value="vm.card.number" type="number" class="col-md-5">Número do cartão:</ui-limit>
+          <div class="form-group col-md-5">
+            <label> Número do cartão: </label>
+            <input type="text" ng-model="vm.card.number" class="form-control" ng-min="100000000000" ui-limit limit="12" required/>
+          </div>
           <div class="form-group col-md-4">
             <label> Mês de expiração: </label>
-            <input type="month" ng-model="vm.card.expiration_date" class="form-control"/>
+            <input type="date" ng-model="vm.card.expiration_date" class="form-control" min="{{ vm.date }}" required/>
           </div>
-          <ui-limit limit="3" value="vm.card.cvv" type"number" class="col-md-3">Código de segurança:</ui-limit>
+          <div class="form-group col-md-3">
+            <label> CVV: </label>
+            <input type="text" ng-model="vm.card.cvv" class="form-control" ng-min="100" ui-limit limit="4"  required/>
+          </div>
         </div>
         <div class="row">
-            <ui-limit limit="50" value="vm.card.holder_name" type="text" class="col-md-8">Nome completo (como no cartão)</ui-limit>
+          <div class="form-group col-md-8">
+            <label>Nome completo</label>
+            <input type="text" ng-model="vm.card.holder_name" class="form-control" minlength="5" required>
+          </div>
         </div>
-        </div>
-        <div class="row error col-md-12">
-          {{ vm.field_errors }}
+        <div class="row error">
+          <div class="col-md-12">
+            <p ng-repeat="error in vm.field_errors track by $index">
+              {{ error }}
+            </p>
+          </div>
         </div>
       </div>
       <div ng-if="vm.payForm === 'billet'" class="billet-form">
         <p class="message-billet">Apenas clique em confirmar transação para finalizar a compra</p>
       </div>
     </form>
+
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+            <h4 class="modal-title" id="myModalLabel">Transação finalizada com sucesso!</h4>
+          </div>
+          <div class="modal-body">
+            <p></p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>

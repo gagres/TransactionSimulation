@@ -7,22 +7,20 @@
 
     function uiLimit(){
       return {
-        restrict:"EA",
-        templateUrl:"templates/uiLimit.html",
-        transclude: true,
+        restrict:"A",
         scope:{
-          "value": "=",
-          "limit": "@",
-          "type": "@"
+          "limit": "@"
         },
-        link: function (scope, elem, attr) {
-          elem.bind('keypress', function (e) {
-            if(scope.value){
-              if(scope.value.toString().length === parseInt(scope.limit)){
-                e.preventDefault();
-                return false;
-              }
-            }
+        require: "ngModel",
+        link: function (scope, elem, attr, ctrl) {
+
+          function formatValue(value){
+            return value.substring(0, scope.limit);
+          }
+
+          elem.bind("keyup", function (e) {
+              ctrl.$setViewValue( formatValue (ctrl.$viewValue));
+              ctrl.$render();
           })
         }
       }

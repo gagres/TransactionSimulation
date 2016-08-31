@@ -11,6 +11,7 @@
       var listProducts = [];
 
       // Normal functions
+      product.clearList = clearList;
       product.getProducts = getProducts;
       product.addInList = addInList;
       product.removeFromList = removeFromList;
@@ -62,6 +63,12 @@
 
       function getProducts(){
         return products;
+      }
+
+      function clearList(){
+        product = {};
+        amount = 0;
+        listProducts = [];
       }
 
       return product;

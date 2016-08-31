@@ -1,0 +1,43 @@
+<div class="transaction" ng-controller="shoppingCtrl as vm">
+  <div class="header">
+    <h2 class="title">Lista de transações feitas</h2>
+  </div>
+  <div class="transaction row">
+    <ul class="list-group">
+      <li class="list-group-item col-md-10 col-md-offset-1" ng-repeat="transaction in vm.listTransactions track by $index"
+      ng-class="{'refused': transaction.status === 'refused', 'paid': transaction.status === 'paid'}">
+        <div class="col-md-6">
+          <p> <b>Código da transação:</b> {{ ::transaction.id }} </p>
+          <p> <b>Forma de pagamento:</b> {{ ::transaction.payment_method }} </p>
+          <p> <b>Custo:</b> R$ {{ ::transaction.amount | coast }} </p>
+        </div>
+        <div class="col-md-3">
+          <p><button class="btn btn-primary btn-block" ng-click="vm.getTransaction(transaction.id)">Ver transação</button></p>
+          <p ng-if="transaction.payment_method === 'boleto' && transaction.status === 'waiting_payment'">
+            <button class="btn btn-danger btn-block" ng-click="vm.simulatePay(transaction)">Simular pagamento</button>
+          </p>
+        </div>
+      </li>
+    </ul>
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close" ng-click="vm.clearTransaction()">
+              <span aria-hidden="true">&times;</span>
+            </button>
+            <h4 class="modal-title" id="myModalLabel">Informações da transação</h4>
+          </div>
+          <div class="modal-body">
+            <p> <b>Código da transação:</b> {{ ::vm.transaction.id }} </p>
+            <p> <b>Data de criação da transação:</b> {{ ::vm.transaction.date_created | date:"dd-MM-yyyy" }} </p>
+            <p> <b>Forma de pagamento:</b> {{ ::vm.transaction.payment_method }} </p>
+            <p> <b>Estado da transação:</b> {{ ::vm.transaction.status }} </p>
+            <p> <b>Custo:</b> R$ {{ ::vm.transaction.amount | coast }} </p>
+            <p> <b>Parcelas:</b> {{ ::vm.transaction.installments }} </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

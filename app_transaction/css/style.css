@@ -14,6 +14,12 @@
 .container .panel{
   border:1px solid #E7B13A;
 }
+.container .panel .header{
+  width:100%;
+  text-align:center;
+  margin-top:5%;
+  margin-bottom:5%;
+}
 
 /*HOME.html config*/
 .products{
@@ -81,11 +87,26 @@
   margin-top:5%;
 }
 .cart .error{
-  text-align:center;
+  text-align: center;
   margin-bottom:10px;
+  color:red;
 }
 .cart .billet-form{
   margin-top:20px;
+}
+
+/*Shopping Config*/
+.transaction ul li{
+  background-color:#FFDC73;
+}
+.transaction ul li.paid{
+  background-color:#90EE90;
+}
+.transaction ul li.refused{
+  background-color:#FF584F;
+}
+.transaction ul li{
+  font-size:16px;
 }
 
 /*Footer config*/

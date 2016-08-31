@@ -4,17 +4,23 @@
   angular
     .module('testApp')
     .controller('transactionCtrl', transactionCtrl)
-    transactionCtrl.$inject = ['Product', '$http'];
+    transactionCtrl.$inject = ['Product', 'Transaction'];
 
-    function transactionCtrl(Product, $http){
+    function transactionCtrl(Product, Transaction){
       var vm = this;
-      vm.field_errors = null;
+      var today = new Date();
+
       vm.card = {
         "number": null,
         "holder_name": null,
         "expiration_date": null,
         "cvv": null
       };
+      //Minimum date
+      vm.date = today.getFullYear() +"-"+ (today.getMonth() < 10 ? '0':'') + (today.getMonth() + 1) +"-0"+ (today.getDay() + 1);
+
+      vm.field_errors = null;
+      vm.informations_transaction = null;
       vm.payForm = null;
       vm.listProducts = Product.getListProducts();
       vm.amount = Product.getFinalAmount();
@@ -29,8 +35,8 @@
 
       //Normal functions
       vm.increaseAmount = increaseAmount;
-      vm.confirmTransaction = confirmTransaction;
       vm.changePayForm = changePayForm;
+      vm.confirmTransaction = confirmTransaction;
 
       function increaseAmount(product, qte){
         product.qte += qte;
@@ -47,24 +53,29 @@
         Product.setFinalAmount(vm.amount);
       }
 
-      function confirmTransaction(card){
-        if(card.hasOwnProperty('expiration_month'))
-          console.log(new Date(card.expiration_month).getMonth(), new Date(card.expiration_month).getFullYear());
+      function changePayForm(form){
+        vm.payForm = form;
+      }
 
-        var request = $http({
-          "url": 'http://localhost/Pagar.me/server_transaction/index.php',
-          "method": "POST"
-        })
+      function confirmTransaction(card){
+        var request = Transaction.makeTransaction(vm.payForm, card);
         request
-          .then(function (data) {
-            console.log(data.data);
-          }, function (err) {
+          .then( function (data) {
+            if(data.hasErrors){
+                vm.field_errors = data.fieldErrors;
+            }else
+              console.log(data);
+              successTransaction(data.data);
+
+          }, function (err){
             console.log(err);
           })
       }
 
-      function changePayForm(form){
-        vm.payForm = form;
+      function successTransaction(data){
+        vm.informations_transaction = data;
+        //Product.clearList();
+        $('#myModal').modal();
       }
     }
 })();

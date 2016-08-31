@@ -21,6 +21,13 @@
           "controllerAs": "vm",
           "cache": false
         })
+        .state("shopping", {
+          "url": "/shopping",
+          "templateUrl": "views/shopping.html",
+          "controller": "shoppingCtrl",
+          "controllerAs": "vm",
+          "cache": false
+        })
 
       $urlRouterProvider.otherwise('/');
     }

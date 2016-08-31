@@ -23,11 +23,15 @@
   <!-- Meus scripts -->
   <script src="js/app.js"></script>
   <script src="js/configs/routeConfig.js"></script>
+  <script src="js/constants/pagarme.js"></script>
   <script src="js/constants/products.js"></script>
   <script src="js/controllers/homeCtrl.js"></script>
+  <script src="js/controllers/shoppingCtrl.js"></script>
   <script src="js/controllers/transactionCtrl.js"></script>
   <script src="js/directives/uiLimitDirective.js"></script>
+  <script src="js/filters/coastFilter.js"></script>
   <script src="js/services/productService.js"></script>
+  <script src="js/services/transactionService.js"></script>
 </head>
 <body ng-app="testApp">
   <div class="container">
@@ -39,7 +43,7 @@
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
           <ul class="nav navbar-nav">
             <li><a href="#/">COMPRAR</a></li>
-            <li><a href="#">VER COMPRAS</a></li>
+            <li><a href="#/shopping">VER COMPRAS</a></li>
           </ul>
         </div>
       </div>
