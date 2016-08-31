@@ -45,10 +45,12 @@
       }
 
       function createPayValue(amount, split_rules) {
-        var payValue = [];
+        var aux, payValue = [];
         if(split_rules) {
           for(var i = 0; i < split_rules.length; i++){
-            payValue.push(((amount / 100) / 100) * split_rules[i].percentage);
+            aux = ((amount / 100) / 100) * split_rules[i].percentage;
+            aux = parseFloat(aux.toFixed(2));
+            payValue.push(aux);
           }
         }else
           payValue.push(amount / 100);
