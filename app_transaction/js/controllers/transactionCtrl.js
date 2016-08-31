@@ -4,9 +4,9 @@
   angular
     .module('testApp')
     .controller('transactionCtrl', transactionCtrl)
-    transactionCtrl.$inject = ['Product', 'Transaction'];
+    transactionCtrl.$inject = ['$state', '$timeout', 'Product', 'Transaction'];
 
-    function transactionCtrl(Product, Transaction){
+    function transactionCtrl($state, $timeout, Product, Transaction){
       var vm = this;
       var today = new Date();
 
@@ -36,6 +36,7 @@
       //Normal functions
       vm.increaseAmount = increaseAmount;
       vm.changePayForm = changePayForm;
+      vm.closeTransaction = closeTransaction;
       vm.confirmTransaction = confirmTransaction;
 
       function increaseAmount(product, qte){
@@ -57,6 +58,13 @@
         vm.payForm = form;
       }
 
+      function closeTransaction(){
+        $('#myModal').modal('hide');
+        $timeout( function() {
+          $state.go('home');
+        }, 1000);
+      }
+
       function confirmTransaction(card){
         var request = Transaction.makeTransaction(vm.payForm, card);
         request
@@ -64,7 +72,6 @@
             if(data.hasErrors){
                 vm.field_errors = data.fieldErrors;
             }else
-              console.log(data);
               successTransaction(data.data);
 
           }, function (err){
@@ -74,8 +81,8 @@
 
       function successTransaction(data){
         vm.informations_transaction = data;
-        //Product.clearList();
-        $('#myModal').modal();
+        Product.clearList();
+        $('#myModal').modal('show');
       }
     }
 })();

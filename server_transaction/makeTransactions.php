@@ -10,7 +10,21 @@
   function makeTransaction($request){
     $transactionValues = array(
       'amount' => $request['amount'],
-      'payment_method' => $request['payForm'] == 'billet' ? 'boleto' : 'credit_card'
+      'payment_method' => $request['payForm'] == 'billet' ? 'boleto' : 'credit_card',
+      'split_rules' => array(
+        array(
+            'recipient_id' => $request['recipients'][0],
+            'charge_processing_fee' => true,
+            'liable' => true,
+            'percentage' => '20',
+        ),
+        array(
+            'recipient_id' => $request['recipients'][1],
+            'charge_processing_fee' => true,
+            'liable' => true,
+            'percentage' => '80',
+        )
+      )
     );
 
     if($request['card_hash'] != null)

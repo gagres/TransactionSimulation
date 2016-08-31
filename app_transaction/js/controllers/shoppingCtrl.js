@@ -36,10 +36,24 @@
         request
           .then( function (data) {
             vm.transaction = data.data;
+            vm.transaction.payValues = createPayValue(vm.transaction.amount, vm.transaction.split_rules);
+
             $('#myModal').modal();
           }, function (err) {
             console.log(err);
           })
+      }
+
+      function createPayValue(amount, split_rules) {
+        var payValue = [];
+        if(split_rules) {
+          for(var i = 0; i < split_rules.length; i++){
+            payValue.push(((amount / 100) / 100) * split_rules[i].percentage);
+          }
+        }else
+          payValue.push(amount / 100);
+
+        return payValue;
       }
 
       function simulatePay(transaction){
@@ -48,7 +62,7 @@
           .then( function (data) {
             transaction.status = "paid";
           }, function (err) {
-            console.log()
+            console.log(err);
           })
       }
     }

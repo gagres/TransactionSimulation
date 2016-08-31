@@ -9,11 +9,11 @@ if (!function_exists('json_decode')) {
 
 
 // function __autoload($class){
-// 
+//
 // 	$dir = dirname(__FILE__) . DIRECTORY_SEPARATOR . "lib" . DIRECTORY_SEPARATOR . "Pagarme" . DIRECTORY_SEPARATOR;
-// 	
+//
 // 	$file = $dir . ((strstr($class, "PagarMe_")) ? str_replace("PagarMe_", "", $class) : $class) . ".php";
-// 
+//
 // 	if (file_exists($file)){
 // 		require_once($file);
 // 		return;

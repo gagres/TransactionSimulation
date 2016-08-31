@@ -5,8 +5,8 @@
     .module('testApp')
     .service('Transaction', Transaction);
 
-    Transaction.$inject = ['$http', '$q', 'Product', 'pagarme']
-    function Transaction($http, $q, Product, pagarme){
+    Transaction.$inject = ['$http', '$q', 'Recipient', 'Product', 'pagarme']
+    function Transaction($http, $q, Recipient, Product, pagarme){
 
       var Card = function Card(card){
         //Criando cartão
@@ -88,12 +88,13 @@
 
       function requestPostTransaction(payForm, card) {
         var request = $http({
-          "url": "http://localhost/Pagar.me/server_transaction/makeTransactions.php",
+          "url": "http://localhost/TransactionSimulation/server_transaction/makeTransactions.php",
           "method": "POST",
           "data": {
             "payForm": payForm,
             "amount": parseInt(Product.getFinalAmount().toString().replace(".", "") + "0"),
-            "card_hash": card ? card: null
+            "card_hash": card ? card: null,
+            "recipients": Recipient.getListRecipients()
           }
         })
 
@@ -102,7 +103,7 @@
 
       function requestGetTransaction(id) {
         var info = {
-          "url": "http://localhost/Pagar.me/server_transaction/getTransactions.php",
+          "url": "http://localhost/TransactionSimulation/server_transaction/getTransactions.php",
           "method": "GET"
         }
         if(id){

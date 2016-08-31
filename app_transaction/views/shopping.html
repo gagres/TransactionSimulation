@@ -35,6 +35,14 @@
             <p> <b>Estado da transação:</b> {{ ::vm.transaction.status }} </p>
             <p> <b>Custo:</b> R$ {{ ::vm.transaction.amount | coast }} </p>
             <p> <b>Parcelas:</b> {{ ::vm.transaction.installments }} </p>
+            <p>
+              <b>Valor a pagar:</b>
+              <ul>
+                <li ng-repeat="payValue in vm.transaction.payValues track by $index">
+                  <b>Recebedor {{ $index + 1 }}:</b> R$ {{ payValue }}
+                </li>
+              </ul>
+            </p>
           </div>
         </div>
       </div>

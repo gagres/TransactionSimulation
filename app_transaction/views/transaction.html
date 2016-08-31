@@ -87,16 +87,21 @@
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close" ng-click="vm.closeTransaction()">
               <span aria-hidden="true">&times;</span>
             </button>
             <h4 class="modal-title" id="myModalLabel">Transação finalizada com sucesso!</h4>
           </div>
           <div class="modal-body">
-            <p></p>
+            <p> <b>Total a pagar:</b> {{ ::vm.informations_transaction.amount | coast }}</p>
+            <p> <b>Status da transação:</b> {{ ::vm.informations_transaction.status }}</p>
+            <p> <b>Data de criação da transação:</b> {{ ::vm.informations_transaction.date_created | date:"dd-MM-yyyy" }}</p>
+            <p> <b>Forma de pagamento:</b> {{ ::vm.informations_transaction.payment_method }}</p>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal" ng-click="vm.closeTransaction()">
+              Close
+            </button>
           </div>
         </div>
       </div>

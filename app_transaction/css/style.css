@@ -96,16 +96,16 @@
 }
 
 /*Shopping Config*/
-.transaction ul li{
+.transaction .list-group li{
   background-color:#FFDC73;
 }
-.transaction ul li.paid{
+.transaction .list-group li.paid{
   background-color:#90EE90;
 }
-.transaction ul li.refused{
+.transaction .list-group li.refused{
   background-color:#FF584F;
 }
-.transaction ul li{
+.transaction .list-group li{
   font-size:16px;
 }
 
