@@ -39,7 +39,7 @@
               <b>Valor a pagar:</b>
               <ul>
                 <li ng-repeat="payValue in vm.transaction.payValues track by $index">
-                  <b>Recebedor {{ $index + 1 }}:</b> R$ {{ payValue }}
+                  <b>Recebedor {{ $index + 1 }}:</b> R$ {{ ::payValue }}
                 </li>
               </ul>
             </p>
