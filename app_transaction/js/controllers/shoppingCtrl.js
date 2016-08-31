@@ -9,7 +9,7 @@
     function shoppingCtrl(Transaction) {
       var vm = this;
       vm.listTransactions = null;
-      vm.transaction = null;
+      vm.transaction = {};
 
       initListTransactions();
       function initListTransactions(){
@@ -28,15 +28,16 @@
       vm.simulatePay = simulatePay;
 
       function clearTransaction(){
-        vm.transaction = null;
+        vm.transaction = {};
       }
 
       function getTransaction(id) {
+        getPayables(id);
+
         var request = Transaction.getTransaction(id);
         request
           .then( function (data) {
-            vm.transaction = data.data;
-            vm.transaction.payValues = createPayValue(vm.transaction.amount, vm.transaction.split_rules);
+            vm.transaction.data = data.data;
 
             $('#myModal').modal();
           }, function (err) {
@@ -44,18 +45,16 @@
           })
       }
 
-      function createPayValue(amount, split_rules) {
-        var aux, payValue = [];
-        if(split_rules) {
-          for(var i = 0; i < split_rules.length; i++){
-            aux = ((amount / 100) / 100) * split_rules[i].percentage;
-            aux = parseFloat(aux.toFixed(2));
-            payValue.push(aux);
-          }
-        }else
-          payValue.push(amount / 100);
+      function getPayables(id){
+        var request = Transaction.getPayables(id);
 
-        return payValue;
+        request
+          .then( function(data) {
+            vm.transaction.payables = data.data;
+
+          }, function (err) {
+            console.log(err);
+          })
       }
 
       function simulatePay(transaction){

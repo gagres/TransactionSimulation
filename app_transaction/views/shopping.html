@@ -30,16 +30,16 @@
           </div>
           <div class="modal-body">
             <p> <b>Código da transação:</b> {{ vm.transaction.id }} </p>
-            <p> <b>Data de criação da transação:</b> {{ vm.transaction.date_created | date:"dd-MM-yyyy" }} </p>
-            <p> <b>Forma de pagamento:</b> {{ vm.transaction.payment_method }} </p>
-            <p> <b>Estado da transação:</b> {{ vm.transaction.status }} </p>
-            <p> <b>Custo:</b> R$ {{ vm.transaction.amount | coast }} </p>
-            <p> <b>Parcelas:</b> {{ vm.transaction.installments }} </p>
-            <p>
-              <b>Valor a pagar:</b>
+            <p> <b>Data de criação da transação:</b> {{ vm.transaction.data.date_created | date:"dd-MM-yyyy" }} </p>
+            <p> <b>Forma de pagamento:</b> {{ vm.transaction.data.payment_method }} </p>
+            <p> <b>Estado da transação:</b> {{ vm.transaction.data.status }} </p>
+            <p> <b>Custo:</b> R$ {{ vm.transaction.data.amount | coast }} </p>
+            <p> <b>Parcelas:</b> {{ vm.transaction.data.installments }} </p>
+            <p ng-if="vm.transaction.payables.length">
+              <b>Valor a receber para cada recebedor:</b>
               <ul>
-                <li ng-repeat="payValue in vm.transaction.payValues track by $index">
-                  <b>Recebedor {{ $index + 1 }}:</b> R$ {{ ::payValue }}
+                <li ng-repeat="payValue in vm.transaction.payables track by $index">
+                  <b>Recebedor {{ $index + 1 }}:</b> R$ {{ ::payValue.amount | coast }}
                 </li>
               </ul>
             </p>

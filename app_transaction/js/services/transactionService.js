@@ -24,6 +24,7 @@
       this.makeTransaction = makeTransaction;
       this.getAllTransactions = getAllTransactions;
       this.getTransaction = getTransaction;
+      this.getPayables = getPayables;
       this.simulatePay = simulatePay;
 
       function makeTransaction(payForm, card){
@@ -35,12 +36,21 @@
         })
       }
 
-      function getAllTransactions(){
+      function getAllTransactions() {
         return requestGetTransaction();
       }
 
       function getTransaction(id) {
         return requestGetTransaction(id);
+      }
+
+      function getPayables(id) {
+        var request = $http({
+          "url": "https://api.pagar.me/1/transactions/"+ id +"/payables?api_key=" + pagarme.myKey,
+          "method": "GET"
+        })
+
+        return request;
       }
 
       function simulatePay(id) {
