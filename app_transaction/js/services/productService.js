@@ -69,6 +69,9 @@
         product = {};
         amount = 0;
         listProducts = [];
+        products.forEach( function (product) {
+          product.qte = 0;
+        })
       }
 
       return product;
